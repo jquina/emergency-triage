@@ -1,0 +1,60 @@
+{%extends "base.html"%}
+
+{%block title%}
+<title>Manchester Triage System</title>
+<link rel="stylesheet" type="text/css" href="/static/triage/css/triage.css" />
+
+<script src="/static/jquery/jquery-1.5.js"></script>
+<link type="text/css" href="/static/jquery/css/redmond/jquery-ui-1.8.9.custom.css" rel="Stylesheet" />	
+<script type="text/javascript" src="/static/jquery/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="/static/jquery/js/jquery-ui-1.8.9.custom.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+$("#options").buttonset();
+
+//var button_height = $("#options").height();
+//var button_number = $("#options input:visible").length
+//var button_width = ($("#options").width()-(40*button_number))/(button_number);
+ 
+//$("#options input").each(function(){
+	//$(this).button("widget").css("padding", "7%");
+	//$(this).button("widget").css("margin", "18px");
+	//$(this).button("widget").outerWidth(button_width);
+	//$(this).button("widget").outerHeight(button_height);
+//})
+
+$("#next > :submit").button();
+$("form > :submit").button();
+})
+</script>
+{%endblock%}
+
+{%block body%}
+
+<div id="reset">
+<form action="" method="post">
+{% csrf_token %}
+<input type="hidden" name = "flush" value="True">
+<input type="submit" value="Reset">
+</form>
+</div>
+
+<div id="title">
+<h1>{{title}}</h1>
+</div>
+
+<div id="form_div">
+<form action="" method="post" id="main_form">
+<div id="options">
+{% csrf_token %}
+{{content|safe}}
+</div>
+
+<div id="next">
+<input type="submit" value="Next">
+</div>
+</div>
+
+</form>
+{%endblock%}
