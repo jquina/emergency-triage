@@ -1,0 +1,52 @@
+{%extends "base.html"%}
+
+{%block title%}
+<title>Manchester Triage System</title>
+<style type="text/css">
+*{
+text-align: center;
+}
+html {
+	background-color: {{triage_color}};
+	}
+h1, h2{
+font-size: 3em;
+}
+#guidance{
+background-color: white;
+margin: 10%;
+}
+
+#quit{
+text-align: center;
+padding: 1%;
+
+position: absolute;
+left: 0%;
+right:90%;
+top:0%;
+bottom:90%;
+}
+#quit input{
+font-size: 1.5em;
+}
+</style>
+{%endblock%}
+
+
+
+{%block body%}
+<div id="quit">
+<form action="" method="post">
+{% csrf_token %}
+<input type="submit" name="quit_flag" value="Quit"/>
+</form>
+</div>
+
+<div id="guidance">
+<h1>Triage Category: {{triage_category}}</h1>
+<h2>Presentation: {{presentation}}</h2>
+<h2>Discriminant: {{discriminant}}</h2>
+</div>
+<p>Manchester Triage System</p>
+{%endblock%}

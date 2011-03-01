@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html>
+<head>
+<title>Manchester Triage System</title>
+
+<style>
+html{height: 100%;}
+
+#quit{background-color: #ffd300;
+text-align: center;
+padding: 1%;
+
+position: absolute;
+left: 0%;
+right:90%;
+top:0%;
+bottom:90%;
+}
+
+#title{background-color: #ffd300;
+text-align: center;
+font-size: 1em;
+
+position: absolute;
+left: 10%;
+right:10%;
+top:0%;
+bottom:90%;
+height: 10%;
+width: 90%;
+}
+
+#prompt{background-color: #ffe773;
+font-size: 1.8em;
+
+position: absolute;
+left:0%;
+right:0%;
+top:10%;
+bottom:60%;
+height: 30%;
+width: 96%;
+padding: 2%
+}
+
+#options{background-color: #ffe773;
+
+position: absolute;
+left:0%;
+right:0%;
+top:40%;
+bottom:30%;
+height: 30%;
+width: 100%;
+}
+
+{% if choices|length == 2 %}
+.option{
+background-color: #6a48d7;
+font-size: 2em;
+text-align: center;
+float: left;
+width: 32%;
+margin: 2% 5%;
+padding: 4%;
+}
+{% endif %}
+
+{% if choices|length > 2 %}
+#options{
+text-align: center;
+}
+#options select{
+font-size: 2em;
+}
+{% endif %}
+
+input{
+font-size: 1.5em;
+}
+
+#comments{background-color: #ffe773;
+padding: 1%;
+text-align: center;
+font-size: 1.2em;
+
+position: absolute;
+left:0%;
+right:0%;
+top:70%;
+bottom:20%;
+}
+
+#back{background-color: #ffd300;
+text-align: center;
+padding: 1%;
+
+position: absolute;
+left:0%;
+right:66.66%;
+top:80%;
+bottom:0%;
+}
+#reset{background-color: #ffd300;
+text-align: center;
+padding: 1%;
+
+position: absolute;
+left:33.33%;
+right:33.33%;
+top:80%;
+bottom:0%;
+}
+#next{background-color: #ffd300;
+text-align: center;
+padding: 1%;
+
+position: absolute;
+left:66.66%;
+right:0%;
+top:80%;
+bottom:0%;
+}
+
+</style>
+
+<script src="jquery/jquery-1.5.js"></script>
+<link type="text/css" href="jquery/css/redmond/jquery-ui-1.8.9.custom.css" rel="Stylesheet" />	
+<script type="text/javascript" src="jquery/js/jquery-1.4.4.min.js"></script>
+<script type="text/javascript" src="jquery/js/jquery-ui-1.8.9.custom.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+<div id="quit">
+<form action="" method="post">
+{% csrf_token %}
+<input type="submit" name="quit_flag" value="Quit"/>
+</form>
+</div>
+
+<div id="title">
+<h1>Discriminator - {{discriminator}}</h1>
+</div>
+
+<div id="prompt">
+<p>{{prompt}}</p>
+</div>
+
+<form action="" method="post">
+{% csrf_token %}
+
+<div id="options">
+{% if choices|length == 2 %}
+{% for choice in choices %}
+<div class="option"><input type="radio" name="{{discriminator}}" value="{{choice}}" id="{{choice}}"/><label for="{{choice}}">{{choice}}</label></div>
+{% endfor %}
+{% endif %}
+
+{% if choices|length > 2 %}
+<select name="{{discriminator}}" size="3">
+{% for choice in choices %}
+<option value="{{choice}}" class="option"/>{{choice}}</option>
+{% endfor %}
+</select>
+{% endif %}
+</div>
+
+<div id="comments">
+<label for="comment_input">Comments: </label><input type="text" name="{{discriminator}}_comment" id="comment_input"/>
+</div>
+
+<div id="back">
+<input type="submit" name="back" value="Back"/>
+</div>
+
+<div id="reset">
+<input type="reset" name="reset" value="Reset"/>
+</div>
+
+<div id="next">
+<input type="submit" name="next" value="Next"/>
+</div>
+
+</form>
+
+</body>
+</html>
