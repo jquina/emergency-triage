@@ -1,0 +1,1 @@
+A computerised implementation of the Manchester Triage System (Macaway-Jones), using Python and Django
